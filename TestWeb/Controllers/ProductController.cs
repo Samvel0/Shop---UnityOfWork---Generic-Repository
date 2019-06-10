@@ -73,7 +73,10 @@ namespace TestWeb.Controllers
         public ActionResult Edit(int id)
         {
             var result = _productService.GetProductId(id);
-            var product = new ProductModel { Id = result.Id, Name = result.Name, Price = result.Price};
+            var product = new ProductModel { Id = result.Id, Name = result.Name, Price = result.Price, CategoryId = result.CategoryId};
+
+            IEnumerable<Category> categories = _productService.GetCategoryList();
+            ViewBag.CategoryList = new SelectList(categories, "Id", "Name");
             return View(product);
         }
 
