@@ -1,5 +1,5 @@
 .vs/
-DataAccess/AppDb/
+#DataAccess/AppDb/
 /bin
 .gitignore
 
@@ -16,5 +16,5 @@ bld/
 [Oo]bj/
 
 # SQL Server files
-*.mdf
-*.ldf
+#*.mdf
+#*.ldf
