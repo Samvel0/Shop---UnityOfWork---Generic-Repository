@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class CategoryRepository : GenericRepository<Category, DataContext>, ICategoryRepository
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(DataContext context) : base(context)
         {

@@ -4,9 +4,8 @@ namespace ServiceContracts.UnitOfWork
 {
     public interface IUnitOfWorkService
     { 
-        ICategoryRepository CategoryRepository { get; }
 
-        IProductRepository ProductRepository { get; }
+        IGenericRepository<T> Repository<T>() where T : class;
 
         int Commit();
     }

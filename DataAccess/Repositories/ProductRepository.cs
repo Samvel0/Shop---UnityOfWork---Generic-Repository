@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class ProductRepository : GenericRepository<Product, DbContext>, IProductRepository
+    public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
         public ProductRepository(DataContext context) : base(context)
         {

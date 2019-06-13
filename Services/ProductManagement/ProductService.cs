@@ -1,9 +1,7 @@
 ﻿using DataAccess.DbTypes;
 using ServiceContracts.ProductManagement;
 using ServiceContracts.UnitOfWork;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Services.ProductManagement
 {
@@ -16,35 +14,35 @@ namespace Services.ProductManagement
         }
         public void AddProduct(Product model)
         {
-            _unitOfWorkService.ProductRepository.Insert(model);
+            _unitOfWorkService.Repository<Product>().Insert(model);
             _unitOfWorkService.Commit();
         }
 
         public void DeleteProduct(int id)
         {
-            _unitOfWorkService.ProductRepository.DeleteById(id);
+            _unitOfWorkService.Repository<Product>().DeleteById(id);
             _unitOfWorkService.Commit();
         }
 
         public void EditProduct(Product model)
         {
-            _unitOfWorkService.ProductRepository.Update(model);
+            _unitOfWorkService.Repository<Product>().Update(model);
             _unitOfWorkService.Commit();
         }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return _unitOfWorkService.ProductRepository.GetAll();
+            return _unitOfWorkService.Repository<Product>().GetAll();
         }
 
         public IEnumerable<Category> GetCategoryList()
         {
-            return _unitOfWorkService.CategoryRepository.GetAll();
+            return _unitOfWorkService.Repository<Category>().GetAll();
         }
 
         public Product GetProductId(int id)
         {
-            return _unitOfWorkService.ProductRepository.GetById(id);
+            return _unitOfWorkService.Repository<Product>().GetById(id);
         }
     }
 }

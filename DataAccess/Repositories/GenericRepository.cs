@@ -7,11 +7,11 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Repositories
 {
-    public class GenericRepository<T, TContext> : IGenericRepository<T> where T : class
-                                                                        where TContext: DbContext
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
+                                                                        
     {
-        private readonly TContext _context;
-        public GenericRepository(TContext context)
+        private readonly DbContext _context;
+        public GenericRepository(DbContext context)
         {
             _context = context;
         }

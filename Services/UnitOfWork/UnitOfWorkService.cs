@@ -10,21 +10,26 @@ namespace Services.UnitOfWork
 {
     public class UnitOfWorkService : IUnitOfWorkService
     {
-        public ICategoryRepository CategoryRepository { get; private set; }
 
-        public IProductRepository ProductRepository { get; private set; }
+        private readonly DataContext _dbContext;        
+        public Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 
-        private DataContext _dbContext;
-
-        public UnitOfWorkService(DataContext dbContext,
-                                 ICategoryRepository categoryRepository,
-                                 IProductRepository productRepository)
+        public UnitOfWorkService(DataContext dbContext)
         {
             _dbContext = dbContext;
-            CategoryRepository = categoryRepository;
-            ProductRepository = productRepository;
         }
 
+        public IGenericRepository<T> Repository<T>() where T : class
+        {
+            if (repositories.ContainsKey(typeof(T)) == true)
+            {
+                return repositories[typeof(T)] as IGenericRepository<T>;
+            }
+
+            IGenericRepository<T> repo = new GenericRepository<T>(_dbContext);
+            repositories.Add(typeof(T), repo);
+            return repo;
+        }
         public int Commit()
         {
             _dbContext.SaveChanges();
