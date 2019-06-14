@@ -45,17 +45,14 @@ namespace TestWeb
 
             services.AddMvc(options =>
            options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            //var conn = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            
             var y = Configuration.GetConnectionString("ShopDatabase");
             var dbFile = ";AttachDbFilename="+Path.GetFullPath(Path.Combine(@"../DataAccess/AppDb/Shop.Mdf"));
             var connection = y.Insert(y.IndexOf(";Trusted"), dbFile);
             services.AddDbContext<DataContext>
                 (options => options.UseSqlServer(connection));
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductService, ProductService>();
         }
 
